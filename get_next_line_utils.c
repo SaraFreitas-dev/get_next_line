@@ -83,19 +83,28 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
+	char	*new_str;
+	size_t	i;
+	size_t	j;
 
-}
-
-#include <stdio.h>
-
-int	main(void)
-{
-	char *s1 = "Hello";
-	char*s2 = " Guys!";
-	char *dest = ft_strjoin(s1, s2);
-
-	printf("%s", dest);
-	free(dest);
-
-	return (0);
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	new_str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+	{
+		new_str[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+		new_str[i++] = s2[j++];
+	new_str[i] = '\0';
+	return (new_str);
 }
