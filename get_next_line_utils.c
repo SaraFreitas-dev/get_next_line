@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-char	*ft_strjoin(char const *s1, char const *s2);
-*/
-
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
@@ -62,12 +58,44 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	
+	char	*new_str;
+	size_t	s_len;
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	if (s_len - start < len)
+		len = s_len - start;
+	new_str = malloc(len + 1);
+	if (!new_str)
+		return (NULL);
+	while (i < len)
+	{
+		new_str[i++] = s[start++];
+	}
+	new_str[i] = '\0';
+	return (new_str);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+
 }
 
 #include <stdio.h>
 
 int	main(void)
 {
-//to test substr next
+	char *s1 = "Hello";
+	char*s2 = " Guys!";
+	char *dest = ft_strjoin(s1, s2);
+
+	printf("%s", dest);
+	free(dest);
+
+	return (0);
 }
