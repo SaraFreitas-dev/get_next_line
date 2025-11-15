@@ -1,48 +1,56 @@
-setline
+set_line(char *buffer)
 
-ver tamanho da linha atual com strlen
-
-----------------------------------------------------------------------------
-
-
-read_line
-
-lê do ficheiro para um buffer
-
-junta esse conteúdo ao que já tínha guardado (strjoin → colecionar pedaços)
+ver tamanho da próxima linha usando strlen  
+conta até ao '\n'; se existir, inclui-o  
+se não existir '\n', devolve o tamanho total (última linha do ficheiro)
+DONE
 
 ----------------------------------------------------------------------------
 
+read_line(int fd, char **buffer)
 
-free_line
-
-liberta apenas o que já não vai ser usar (a linha que já foi devolvida)
-
-
-----------------------------------------------------------------------------
-
-get_next_line
-
-chama as funções auxiliares para montar 1 linha
-
-usa strchr para ver se já existe \n
-
-se encontrou \n:
-
-usa substr para cortar a linha até \n (linha pronta a devolver)
-
-usa substr outra vez para guardar o resto depois do \n (para a próxima chamada)
-
-se ainda não encontrou \n:
-
-continua a ler e a fazer strjoin até encontrar ou acabar o ficheiro
-
-quando a linha está pronta, faz strdup (ou equivalente) para devolver uma cópia segura
-
-guarda o resto acumulado para a próxima chamada
-
-na próxima vez, começa a partir desse resto
+ler e montar a string acumulada
+devolver essa string (line) pronta para ser cortada por outra função
 
 ----------------------------------------------------------------------------
 
+free_line(char **ptr)
+
+liberta memória que já não vai ser usada  
+(ex.: o buffer antigo depois de ser substituído pelo resto)
+
+DONE
+
+----------------------------------------------------------------------------
+
+split_line(char **buffer)
+
+usa set_line() para saber o tamanho da próxima linha  
+cria current_line usando substr()  
+cria next_buffer usando substr() para guardar o resto  
+actualiza buffer para next_buffer  
+liberta o buffer antigo usando free_line()
+
+RETORNA:
+current_line (char *)
+
+----------------------------------------------------------------------------
+
+get_next_line(int fd)
+
+usa read_line() para garantir que buffer tem dados suficientes  
+se buffer estiver vazio → devolve NULL  
+chama split_line() para obter current_line e atualizar buffer  
+devolve current_line  
+na chamada seguinte, começa a partir do buffer atualizado
+
+RETORNA:
+a próxima linha (char *)  
+NULL se acabar o ficheiro ou der erro
+
+----------------------------------------------------------------------------
+
+Compilação:
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c
+
+----------------------------------------------------------------------------
