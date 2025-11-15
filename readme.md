@@ -152,4 +152,5 @@ close(fd);
 
 This project is part of the 42 curriculum and intended for educational use.  
 Feel free to explore the code, but try to understand it rather than copying it. ✨
-```
+
+
