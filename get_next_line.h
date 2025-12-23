@@ -6,7 +6,7 @@
 /*   By: sarfreit <sarfreit@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:34:29 by sarfreit          #+#    #+#             */
-/*   Updated: 2025/10/30 22:22:18 by sarfreit         ###   ########.fr       */
+/*   Updated: 2025/12/13 18:29:59 by sarfreit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);

@@ -1,28 +1,8 @@
-# 📜 get_next_line
+*This project has been created as part of the 42 curriculum by sarfreit.*
 
-**get_next_line** is a 42 project focused on implementing a function that reads a file (or input) **one line at a time**, regardless of line length or buffer size.  
-This project reinforces memory management, static variables, and low-level file reading.
-
----
-
-## 🧠 Goal
-
-Implement the function:
-
-```c
-char *get_next_line(int fd);
-```
-
-that returns the next line from a file descriptor:
-
-- Includes the terminating `\n` (except at end-of-file)
-- Uses dynamic memory allocation
-- Maintains leftover data between calls using a static variable
-- Works efficiently using a configurable `BUFFER_SIZE`
-
----
-
-## 📚 Description
+## Description
+The **get_next_line** project consists of implementing a function that reads and returns one line at a time from a file descriptor.
+Its goal is to allow efficient line-by-line reading while handling partial reads and preserving state between function calls.
 
 ### ✅ Mandatory part
 
@@ -44,113 +24,38 @@ Additionally, the bonus version must:
 
 ---
 
-## ⚙️ Compilation
+## Instructions
+The project is written in C and must be compiled with a defined `BUFFER_SIZE`.
 
-Compile using:
-
+# Define BUFFER_SIZE and compile the mandatory files
 ```bash
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 *.c
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main_mandatory.c get_next_line.c get_next_line_utils.c -o test_mandatory
 ```
-
-Examples:
-
+# Execute the tester
 ```bash
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=1 *.c
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=1000 *.c
+./test_mandatory
 ```
 
-Run:
-
+# Define BUFFER_SIZE and compile the bonus files
 ```bash
-./a.out file.txt
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=10 main_bonus.c get_next_line_bonus.c get_next_line_utils_bonus.c -o test_bonus
+```
+
+# Execute the tester
+```bash
+./test_bonus
+```
+
+# Check for Leaks
+```bash
+valgrind --leak-check=full --show-leak-kinds=all ./test_mandatory
+```
+```bash
+valgrind --leak-check=full --show-leak-kinds=all ./test_bonus
 ```
 
 ---
 
-## 🧱 Project Structure
+## Resources
 
-```
-get_next_line/
-├── get_next_line.c
-├── get_next_line.h
-├── get_next_line_utils.c
-├── get_next_line_bonus.c
-├── get_next_line_bonus.h
-├── get_next_line_utils_bonus.c
-└── README.md
-```
-
----
-
-## 🔍 How It Works
-
-### 📌 Core logic
-
-1. Use `read()` to fill a temporary buffer.
-2. Append this buffer to leftover data stored in a static string.
-3. Extract a full line (ending with `\n` if present).
-4. Save the remaining data for the next call.
-5. Return the extracted line.
-
-### 📌 Important details
-
-- The function returns `NULL` on error or when EOF is reached.
-- No global variables allowed.
-- Returned lines must be freed by the caller.
-- Static variables preserve state between calls.
-
----
-
-## ⭐ Bonus: Multiple File Descriptors
-
-The bonus version stores leftover data **per FD**, like:
-
-```
-buffer[3] → leftover from FD 3
-buffer[4] → leftover for FD 4
-buffer[5] → leftover for FD 5
-```
-
-This allows alternating between descriptors:
-
-```c
-get_next_line(fd1);
-get_next_line(fd2);
-get_next_line(fd1);
-```
-
-Each FD continues where it left off.
-
----
-
-## 🧪 Example Usage
-
-```c
-int fd = open("file.txt", O_RDONLY);
-char *line;
-
-while ((line = get_next_line(fd)) != NULL)
-{
-    printf("%s", line);
-    free(line);
-}
-close(fd);
-```
-
----
-
-## 🧾 Notes
-
-- Must handle very long lines correctly.
-- Must compile without memory leaks.
-- Must work with files, stdin, and pipes.
-- Implementation must follow the 42 Norm.
-
----
-
-## 📜 License
-
-This project is part of the 42 curriculum and intended for educational use.  
-Feel free to explore the code, but try to understand it rather than copying it. ✨
-
-
+For this project I used the help of some GitBooks from older students, and websites like GeeksforGeeks and W3Schools.

@@ -6,7 +6,7 @@
 /*   By: sarfreit <sarfreit@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 20:33:51 by sarfreit          #+#    #+#             */
-/*   Updated: 2025/10/30 22:23:21 by sarfreit         ###   ########.fr       */
+/*   Updated: 2025/12/13 01:17:45 by sarfreit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	next_line = malloc(ft_strlen(buffer) - i + 1);
 	if (buffer[i] == '\n')
 		i++;
+	next_line = malloc(ft_strlen(buffer) - i + 1);
 	j = 0;
 	while (buffer[i])
 		next_line[j++] = buffer[i++];
@@ -121,6 +121,7 @@ char	*get_next_line(int fd)
 	buffer = ft_next(buffer);
 	return (line);
 }
+
 /*
 #include <stdio.h>
 int main(void)
