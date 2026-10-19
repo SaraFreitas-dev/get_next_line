@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://github.com/SaraFreitas-dev/42_School_Badges"><img src="https://raw.githubusercontent.com/SaraFreitas-dev/42_School_Badges/main/Badges/Milestone_1/svg/get_next_line-bonus.svg" width="150" alt="get_next_line-bonus"/></a>
+<a href="https://github.com/SaraFreitas-dev/42_School_Badges"><img src="https://raw.githubusercontent.com/SaraFreitas-dev/42_School_Badges/main/Badges/Milestone_1/svg/get_next_line-bonus.svg" width="300" alt="get_next_line-bonus"/></a>
 </p>
 
 *This project has been created as part of the 42 curriculum by sarfreit.*
